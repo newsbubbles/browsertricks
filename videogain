@@ -1,0 +1,16 @@
+/* YouTube audio gain for videos (can be used on other sites with a 'video' element
+ * Audio Gain node so that videos with very weak audio volume can be maximized
+ * Great for when you have only laptop speakers and you can't hear the audio
+ */
+
+// create an audio context
+var audioCtx = new AudioContext();
+var source = audioCtx.createMediaElementSource(document.querySelector('video'));
+
+// create a gain node
+var gainNode = audioCtx.createGain();
+gainNode.gain.value = 2; // double the volume
+source.connect(gainNode);
+
+// connect the gain node to an output destination
+gainNode.connect(audioCtx.destination);
